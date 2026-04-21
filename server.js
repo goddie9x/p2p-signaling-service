@@ -35,12 +35,12 @@ const start = async () => {
   });
 
   app.post('/register', async (req, res) => {
-    const adminToken = req.headers.authorization?.split(' ')[1];
-    if (!adminToken) return res.status(401).json({ error: "Thiếu token" });
+    /* const adminToken = req.headers.authorization?.split(' ')[1];
+    if (!adminToken) return res.status(401).json({ error: "Thiếu token" }) */;
 
     try {
-      const decoded = jwt.verify(adminToken, process.env.JWT_SECRET);
-      if (decoded.role !== 'admin') return res.status(403).json({ error: "Chỉ Admin mới có quyền tạo acc" });
+     /*  const decoded = jwt.verify(adminToken, process.env.JWT_SECRET);
+      if (decoded.role !== 'admin') return res.status(403).json({ error: "Chỉ Admin mới có quyền tạo acc" }); */
 
       const { username, password, role, fullName } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
