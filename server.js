@@ -107,7 +107,6 @@ const start = async () => {
   io.on("connection", async (socket) => {
     await pubClient.set(`online:${socket.userId}`, socket.id);
 
-    // Xử lý tìm kiếm User theo Username#Tag
     socket.on("search_peer", async ({ username, tag }) => {
       const peer = await User.findOne({ username, tag }).select("_id fullName");
       if (peer) {
@@ -118,7 +117,6 @@ const start = async () => {
       }
     });
 
-    // Chuyển tiếp tín hiệu P2P
     socket.on("signal", async ({ to, signalData }) => {
       const targetSocketId = await pubClient.get(`online:${to}`);
       if (targetSocketId) {
